@@ -36,9 +36,8 @@ public class App {
 			do {
 				 System.out.println(" if you want to add Ustentile Enter 1 ");
 				 System.out.println(" if you want to Update Ustensile Date Enter 2 ");
-				 System.out.println(" if you want to See All Ustentile with Prices Enter 3 ");
-				 System.out.println(" if you want to See All Vessel with Surface Enter 4 ");
-				 System.out.println(" if you want to See All Spoon with length Enter 5 ");
+				 System.out.println(" if you want to See All Ustentile with Prices & surface Enter 3 ");
+				
 				 
 				 choice1  = take.nextInt();
 				 
@@ -54,14 +53,39 @@ public class App {
 					 System.out.println("Enter 3 to Update a Spoon Date...");
 					 break;
 				 case 3:
-					 System.out.println("Enter 1 to See a Round Vessel Prices...");
-					 System.out.println("Enter 2 to See a Square Vessel Prices...");
-					 System.out.println("Enter 3 to See a Spoon Prices...");
+						query = "select * from roundvessel";
+						database.connexion();
+						resultlist = database.showLists(query);
+						System.out.println("Round-Vessel List");
+						System.out.println("   id_ustensile || Year Bulding  ||   name_ustensile || Radius ||      Surface     || Price  ||");
+						while(resultlist.next())
+						{
+							System.out.println(resultlist.getInt("id")+" | "+resultlist.getInt("construction_year")+" | "+resultlist.getString("name")+" | "+resultlist.getInt("radius")+" | "+resultlist.getDouble("surface")+"|"+resultlist.getInt("price")+"\n");
+							
+						}
+						query = "select * from squarevessel";
+						database.connexion();
+						resultlist = database.showLists(query);
+						System.out.println("Square-Vessel List");
+						System.out.println("   id_ustensile || Year Bulding  ||   name_ustensile || Radius ||      Surface     || Price  ||");
+						while(resultlist.next())
+						{
+							System.out.println(resultlist.getInt("id")+" | "+resultlist.getInt("construction_year")+" | "+resultlist.getString("name")+" | "+resultlist.getInt("corner")+" | "+resultlist.getDouble("surface")+"|"+resultlist.getInt("price")+"\n");
+							
+						}
+						query = "select * from spoon";
+						database.connexion();
+						resultlist = database.showLists(query);
+						System.out.println("Spoon List");
+						System.out.println("   id_ustensile || Year Bulding || length|| Price  ||");
+						while(resultlist.next())
+						{
+							System.out.println(resultlist.getInt("id")+" | "+resultlist.getInt("construction_year")+" | "+resultlist.getDouble("length")+" | "+resultlist.getInt("price")+"\n");
+							
+						}
+						database.deConnexion();
 					 break;
-				 case 4:
-					 System.out.println("Enter 1 to See a Round Vessel Surfaces...");
-					 System.out.println("Enter 2 to See a Square Vessel Surfaces...");
-					 break;
+			
 				
 				 }
 			
